@@ -18,6 +18,7 @@ cortex-m-rt = "0.7" # Startup code and minimal runtime for Cortex-M
 panic-halt = "1.0"  # Basic panic handler that halts on panic
 defmt = "1.0"       # Deferred formatting for embedded logging
 defmt-rtt = "1.1"   # RTT (Real-Time Transfer) transport for defmt
+heapless = "0.9"    # Fixed-size collections for no_std environments
 
 # Debug probe panic handler with defmt support
 panic-probe = { version = "1.0", features = ["print-defmt"] }
@@ -44,6 +45,17 @@ embassy-time = { version = "0.5", features = [
 ] }
 embassy-sync = { version = "0.7", features = ["defmt"] }
 embassy-futures = { version = "0.1", features = ["defmt"] }
+
+
+########################################################################################
+# Dependencies required during build process (ie. build.rs)
+# Reference: https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#build-dependencies
+[build-dependencies]
+serde = "1.0"
+serde_json = "1.0"
+
+
+
 
 ########################################################################################
 # Compiler profile for when running cargo run --releas
