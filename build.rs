@@ -11,15 +11,17 @@ use std::path::PathBuf;
 
 /// Main build script entry point
 fn main() {
-    // Put `memory.x` in our output directory and ensure it's on the linker search path.
+    // Put `memory.x` in our output directory
     let out_dir = &PathBuf::from(env::var_os("OUT_DIR").unwrap());
     fs::File::create(out_dir.join("memory.x"))
         .unwrap()
         .write_all(include_bytes!("etc/memory.x"))
         .unwrap();
+
+    // Ensure 'memory.x' is on the linker search path
     println!("cargo:rustc-link-search={}", out_dir.display());
 
-    // Re-run for any changes to `memory.x` and `build.rs`
+    // Re-run for any changes to the following files
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-changed=etc/memory.x");
     println!("cargo:rerun-if-changed=etc/configs.json");

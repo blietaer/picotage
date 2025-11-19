@@ -1,3 +1,25 @@
 # picotage
 
 Just some interesting embedded Rust tutorial series I found floating around the interent that I wanted to try.
+
+Run me with `cargo run --release`
+
+## Configurations
+
+This project contains a `configs.json` file that contains various
+configuration values for this program. The program will load these
+values during the build process.
+
+Currently the following configurations are supported:
+
+```json
+{
+  "clock_system_frequency_mhz": "133",
+  "clock_usb_frequency_mhz": "48",
+  "clock_peripheral_divider": "1",
+  "clock_adc_frequency_mhz": "48",
+  "clock_reference_divider": "1"
+}
+```
+
+
