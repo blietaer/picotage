@@ -1,0 +1,34 @@
+# Reference: https://doc.rust-lang.org/cargo/reference/config.html
+
+##############################################################################
+# Build and Compiler Settings
+# Reference: https://doc.rust-lang.org/cargo/reference/config.html#build
+[build]
+target = "thumbv8m.main-none-eabihf" # Chip: Cortex-M33 (ARMv8-M) (RP2350)
+rustc = "rustc"                      # Rust Compiler
+rustdoc = "rustdoc"                  # Rust Documentation Generator
+jobs = 1                             # Number of parallel jobs to run
+
+##############################################################################
+# Run Specification for Spcific Target Platform
+# Reference: https://doc.rust-lang.org/cargo/reference/config.html#target
+[target.thumbv8m.main-none-eabihf]
+runner = "picotool load -u -v -x -t elf"
+
+# runner = [
+#   "probe-rs",
+#   "run",
+#   "--chip=RP235x",
+#   "--log-format",
+#   "[{t}] {[{L}]%dimmed%bold} {{f:dimmed}:{l:dimmed}%30}: {s}",
+# ]
+# Custom flags for compiler for this target
+rustflags = ["-C", "link-args=-Tlink.x -Tdefmt.x", "-C", "no-vectorize-loops"]
+
+##############################################################################
+# Environmental Variables
+# Reference: https://doc.rust-lang.org/cargo/reference/config.html#env
+[env]
+# Logger Formatting: https://defmt.ferrous-systems.com/custom-log-output
+DEFMT_LOG = { value = "debug", force = true }
+

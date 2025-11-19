@@ -1,0 +1,60 @@
+########################################################################################
+# This Project/Package Metadata
+# Reference: https://doc.rust-lang.org/cargo/reference/workspaces.html#the-package-table
+[package]
+authors = ["Benoit Lietaer"]
+edition = "2024"            # Rust code edition: https://doc.rust-lang.org/edition-guide/rust-2021/index.html
+license = "MIT"
+name = "picotage"
+version = "0.1.0"           # This project version
+readme = "README.md"
+
+########################################################################################
+# Rust program dependencies
+# Reference: https://doc.rust-lang.org/cargo/guide/dependencies.html
+[dependencies]
+cortex-m = "0.7"    # Core support for ARM Cortex-M microcontrollers (M33 for RP2350)
+cortex-m-rt = "0.7" # Startup code and minimal runtime for Cortex-M
+panic-halt = "1.0"  # Basic panic handler that halts on panic
+defmt = "1.0"       # Deferred formatting for embedded logging
+defmt-rtt = "1.1"   # RTT (Real-Time Transfer) transport for defmt
+
+# Debug probe panic handler with defmt support
+panic-probe = { version = "1.0", features = ["print-defmt"] }
+
+# Embassy Rust embedded framework dependencies
+embassy-embedded-hal = { version = "0.5", features = ["defmt"] }
+embassy-executor = { version = "0.9", features = [
+  "arch-cortex-m",
+  "executor-thread",
+  "executor-interrupt",
+  "defmt",
+] }
+embassy-rp = { version = "0.8", features = [
+  "critical-section-impl",
+  "time-driver",
+  "defmt",
+  "unstable-pac",
+  "rp235xb",
+  "binary-info",
+] }
+embassy-time = { version = "0.5", features = [
+  "defmt",
+  "defmt-timestamp-uptime",
+] }
+embassy-sync = { version = "0.7", features = ["defmt"] }
+embassy-futures = { version = "0.1", features = ["defmt"] }
+
+########################################################################################
+# Compiler profile for when running cargo run --releas
+# Reference: https://doc.rust-lang.org/cargo/reference/profiles.html
+[profile.release]
+codegen-units = 1        # Number of codegen units - 1
+debug = 2                # Debug info included in compiled binary - 0: none, 1: line numbers, 2: full
+debug-assertions = false # Debug assertion - disabled
+incremental = false      # Incremental compilation - disabled
+lto = 'fat'              # Link-time optimization - fat: Perform optimization across all crates
+opt-level = "s"          # Optimize compile - s: optimize for binary size
+overflow-checks = true   # Integer overflow checks - disabled
+panic = "abort"          # Panic strategy - abort: terminate process upon panic
+rpath = false            # Relative path - disabled
