@@ -30,5 +30,5 @@ rustflags = ["-C", "link-args=-Tlink.x -Tdefmt.x", "-C", "no-vectorize-loops"]
 # Reference: https://doc.rust-lang.org/cargo/reference/config.html#env
 [env]
 # Logger Formatting: https://defmt.ferrous-systems.com/custom-log-output
-DEFMT_LOG = { value = "trace", force = true }
+DEFMT_LOG = { value = "info", force = true }
 

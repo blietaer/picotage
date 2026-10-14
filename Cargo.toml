@@ -15,23 +15,25 @@ readme = "README.md"
 [dependencies]
 cortex-m = "0.7"    # Core support for ARM Cortex-M microcontrollers (M33 for RP2350)
 cortex-m-rt = "0.7" # Startup code and minimal runtime for Cortex-M
-defmt = "1.0"       # Deferred formatting for embedded logging
-defmt-rtt = "1.1"   # RTT (Real-Time Transfer) transport for defmt
+defmt = "1.1"       # Deferred formatting for embedded logging
+defmt-rtt = "1.3"   # RTT (Real-Time Transfer) transport for defmt
 heapless = "0.9"    # Fixed-size collections for no_std environments
+static_cell = "2"   # Statically allocated buffers
+embedded-io-async = "0.7" # Async I/O traits (UART reads)
 panic-halt = "1.0"  # Basic panic handler that halts on panic
 
 # Debug probe panic handler with defmt support
 panic-probe = { version = "1.0", features = ["print-defmt"] }
 
 # Embassy Rust embedded framework dependencies
-embassy-embedded-hal = { version = "0.5", features = ["defmt"] }
-embassy-executor = { version = "0.9", features = [
-  "arch-cortex-m",
+embassy-embedded-hal = { version = "0.6", features = ["defmt"] }
+embassy-executor = { version = "0.10", features = [
+  "platform-cortex-m",
   "executor-thread",
   "executor-interrupt",
   "defmt",
 ] }
-embassy-rp = { version = "0.8", features = [
+embassy-rp = { version = "0.10", features = [
   "critical-section-impl",
   "time-driver",
   "defmt",
@@ -43,7 +45,7 @@ embassy-time = { version = "0.5", features = [
   "defmt",
   "defmt-timestamp-uptime",
 ] }
-embassy-sync = { version = "0.7", features = ["defmt"] }
+embassy-sync = { version = "0.8", features = ["defmt"] }
 embassy-futures = { version = "0.1", features = ["defmt"] }
 
 ########################################################################################

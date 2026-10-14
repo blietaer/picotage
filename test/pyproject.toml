@@ -1,0 +1,9 @@
+[project]
+name = "test"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "coloredlogs>=15.0.1",
+    "hexdump>=3.3",
+    "pyserial>=3.5",
+]

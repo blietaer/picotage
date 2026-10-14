@@ -1,7 +1,7 @@
 [toolchain]
 
 # Specifies using the nightly version of Rust, which has the latest experimental features
-channel = "nightly"
+# channel = "nightly"
 
 # Lists the Rust components to include in the toolchain
 components = ["rust-src", "rust-std", "rustc-dev", "cargo", "rustfmt", "clippy"]
